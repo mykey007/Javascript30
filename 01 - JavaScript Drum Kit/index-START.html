@@ -58,7 +58,26 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+function playSound(e){
+  //console.log(e.keyCode);
+  const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+  const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+  if(!audio) return; //stop the function since there is no keyCode to play
+  audio.currentTime = 0; //rewind to the start for low latency
+  audio.play();
+  //console.log(audio);
+  key.classList.add('playing'); //like jQuery's $('#me').addClass();
+}
 
+function removeTransition(e){
+  if(e.propertyName !== 'transform') return; //skip if not a transform
+  //console.log(e.propertyName);
+  this.classList.remove('playing');
+}
+
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+window.addEventListener('keydown', playSound); //playSound function was an anonymous function inside this event listener until we 'cleaned it up'
 </script>
 
 
