@@ -43,7 +43,7 @@
   </div>
 
   <script>
-    //debounce is 
+    //debounce is what we use to make the scroll events behave
     function debounce(func, wait = 20, immediate = true) {
       var timeout;
       return function() {
@@ -74,6 +74,8 @@
 
         if(isHalfShown && isNotScrolledPast){
           sliderImage.classList.add('active');
+        } else {
+          sliderImage.classList.remove('active');
         }
         console.log(slideInAt);
       });
