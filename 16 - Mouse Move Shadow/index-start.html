@@ -7,7 +7,7 @@
 <body>
 
   <div class="hero">
-    <h1 contenteditable>🔥WOAH!</h1>
+    <h1 contenteditable>🍑 WOAH!</h1>
   </div>
 
   <style>
@@ -17,6 +17,7 @@
   }
 
   .hero {
+
     min-height: 100vh;
     display:flex;
     justify-content: center;
@@ -27,10 +28,44 @@
   h1 {
     text-shadow: 10px 10px 0 rgba(0,0,0,1);
     font-size: 100px;
+    /*background: lime;*/
   }
   </style>
 
 <script>
+const hero = document.querySelector('.hero');
+const text = document.querySelector('h1');
+const walk = 420; // will take the shadows 666px out of their start position
+
+function shadow(e) {
+  //console.log(e);
+  const width = hero.offsetWidth;
+  const height = hero.offsetHeight;
+  // using let so we can reassign these later
+  let {offsetX: x, offsetY: y} = e;
+  //console.log(x, y); getting some coordinates from other elments
+  // here: this = hero; and if this isnt equal to the mousemove target event...
+
+  if(this !== e.target) {
+    x = x + e.target.offsetLeft;
+    y = y + e.target.offsetTop;
+  }
+
+  const xWalk = Math.round((x / width * walk) - (walk / 2));
+  const yWalk = Math.round((y / width * walk) - (walk / 2));
+
+  // console.log(xWalk, yWalk);
+
+  text.style.textShadow = `
+    ${xWalk}px ${yWalk}px 0px dodgerblue,
+    ${xWalk * -1}px ${yWalk}px 0px rgba(255, 0, 255, 0.7),
+    ${xWalk}px ${yWalk * -1}px 0px rgba(0, 255, 0, 0.9),
+    ${xWalk * -1}px ${yWalk * -1}px 0px rgba(255, 255, 0, 0.5)
+
+  `;
+}
+
+hero.addEventListener('mousemove', shadow);
 </script>
 </body>
 </html>
