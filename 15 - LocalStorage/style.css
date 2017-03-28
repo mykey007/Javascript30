@@ -1,7 +1,7 @@
 
     html {
       box-sizing: border-box;
-      background:url('http://wes.io/hx9M/oh-la-la.jpg') center no-repeat;
+      background:url('oh-la-la.jpg') center no-repeat;
       background-size:cover;
       min-height:100vh;
       display:flex;
@@ -59,12 +59,12 @@
     }
 
     .plates input + label:before {
-      content: '⬜️';
+      content: '🐩️';
       margin-right: 10px;
     }
 
     .plates input:checked + label:before {
-      content: '🌮';
+      content: '💩';
     }
 
     .add-items {
