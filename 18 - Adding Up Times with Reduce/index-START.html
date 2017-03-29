@@ -185,9 +185,24 @@
 // we need to make this into an array, currently a NodeList
 const timeNodes = [...document.querySelectorAll('[data-time]')];
 
-const seconds = timeNodes.map(node => node.dataset.time);
+const seconds = timeNodes
+  .map(node => node.dataset.time)
+  .map(timeCode => {
+    const [mins, secs] = timeCode.split(':').map(parseFloat);
+    return(mins * 60) + secs;
+    console.log(mins, secs);
+  }).reduce((total, vidSeconds) => {
+    return total + vidSeconds;
+  });
 
-console.log(timeNodes);
+  let secondsLeft = seconds;
+
+  const hours = Math.floor(secondsLeft / 3600);
+  secondsLeft = secondsLeft % 3600; // % = modulus = remainder
+
+  const mins = Math.floor(secondsLeft / 60);
+  secondsLeft = secondsLeft % 60;
+  console.log(hours, mins, secondsLeft);
 </script>
 </body>
 </html>
