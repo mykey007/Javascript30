@@ -182,6 +182,12 @@
     </li>
 
 <script>
+// we need to make this into an array, currently a NodeList
+const timeNodes = [...document.querySelectorAll('[data-time]')];
+
+const seconds = timeNodes.map(node => node.dataset.time);
+
+console.log(timeNodes);
 </script>
 </body>
 </html>
